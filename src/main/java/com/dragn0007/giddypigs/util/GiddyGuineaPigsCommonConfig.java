@@ -12,8 +12,8 @@ public class GiddyGuineaPigsCommonConfig {
     static {
         BUILDER.push("Configs for Giddy Guinea Pigs!");
 
-        GUINEA_PIG_WEIGHT = BUILDER.comment("How often should guinea pigs spawn? Default is 4.")
-                .define("Guinea Pig Spawn Weight", 4);
+        GUINEA_PIG_WEIGHT = BUILDER.comment("How often should guinea pigs spawn? Default is 6.")
+                .define("Guinea Pig Spawn Weight", 6);
 
         BUILDER.pop();
         SPEC = BUILDER.build();

@@ -1,0 +1,6 @@
+{
+  "type": "giddypigs:spawn_biome_modifier",
+  "biomes": [
+    "guineapig_spawns"
+  ]
+}
