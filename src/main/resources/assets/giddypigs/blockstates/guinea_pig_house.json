@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "giddypigs:block/guinea_pig_house",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "giddypigs:block/guinea_pig_house"
+    },
+    "facing=south": {
+      "model": "giddypigs:block/guinea_pig_house",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "giddypigs:block/guinea_pig_house",
+      "y": 270
+    }
+  }
+}

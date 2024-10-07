@@ -1,0 +1,14 @@
+{
+  "itemGroup.giddy_pigs": "Giddy Guinea Pigs",
+
+  "item.giddypigs.guinea_pig_spawn_egg": "Guinea Pig Spawn Egg",
+  "entity.giddypigs.guinea_pig_entity": "Guinea Pig",
+
+  "block.giddypigs.guinea_pig_house": "Guinea Pig House",
+  "block.giddypigs.food_dish_black": "Black Food Dish",
+  "block.giddypigs.food_dish_brown": "Brown Food Dish",
+  "block.giddypigs.food_dish_white": "White Food Dish",
+  "block.giddypigs.water_bottle": "Water Bottle",
+  "block.giddypigs.enclosure_pane": "Enclosure Pane",
+  "block.giddypigs.enclosure_pane_corner": "Enclosure Pane Corner"
+}

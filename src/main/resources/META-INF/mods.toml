@@ -1,0 +1,30 @@
+modLoader="javafml"
+loaderVersion="47,)"
+license="All rights reserved"
+[[mods]]
+modId="giddypigs"
+version="${1.0}"
+displayName="Giddy Guinea Pigs!"
+logoFile="ggp_logo_big.png"
+authors="DragN0007"
+description='''
+Adds guinea pigs and decor!
+'''
+[[dependencies.giddypigs]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies.giddypigs]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1]"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies.giddypigs]]
+modId="geckolib"
+mandatory=true
+versionRange = "[4.4.4,)"
+ordering="NONE"
+side="BOTH"

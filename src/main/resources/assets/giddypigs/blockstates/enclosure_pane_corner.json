@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "giddypigs:block/enclosure_pane_corner",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "giddypigs:block/enclosure_pane_corner"
+    },
+    "facing=south": {
+      "model": "giddypigs:block/enclosure_pane_corner",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "giddypigs:block/enclosure_pane_corner",
+      "y": 270
+    }
+  }
+}
