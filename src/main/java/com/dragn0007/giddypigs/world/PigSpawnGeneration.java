@@ -29,6 +29,7 @@ public record PigSpawnGeneration(HolderSet<Biome> biomes) implements BiomeModifi
             if(biome.is(Biomes.SPARSE_JUNGLE) || biome.is(Biomes.MEADOW) || biome.is(Biomes.SAVANNA)) {
                 spawner.addAll(GUINEAPIG_SPAWNS);
             }
+            System.out.println("Spawned a Guinea Pig at: " + EntityTypes.GUINEA_PIG_ENTITY.get().getDescription());
         }
     }
 

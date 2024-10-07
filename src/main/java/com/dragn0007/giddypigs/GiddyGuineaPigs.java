@@ -30,7 +30,6 @@ public class GiddyGuineaPigs
     public static final String MODID = "giddypigs";
 
     public static final DeferredRegister<Codec<? extends BiomeModifier>> BIOME_MODIFIER_SERIALIZERS = DeferredRegister.create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, MODID);
-
     public static final RegistryObject<Codec<PigSpawnGeneration>> SPAWN_CODEC = BIOME_MODIFIER_SERIALIZERS.register("spawn_biome_modifier",
             () -> RecordCodecBuilder.create(builder ->
                     builder.group(Biome.LIST_CODEC.fieldOf("biomes").forGetter(PigSpawnGeneration::biomes)).apply(builder, PigSpawnGeneration::new)));
@@ -43,6 +42,7 @@ public class GiddyGuineaPigs
         GGPBlocks.register(eventBus);
         GGPItemGroup.register(eventBus);
         EntityTypes.ENTITY_TYPES.register(eventBus);
+        BIOME_MODIFIER_SERIALIZERS.register(eventBus);
 
         GeckoLib.initialize();
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GiddyGuineaPigsCommonConfig.SPEC, "guinea_pigs-common.toml");

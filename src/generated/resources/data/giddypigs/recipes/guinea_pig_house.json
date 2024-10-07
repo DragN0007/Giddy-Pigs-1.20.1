@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:iron_nugget"
+    },
+    "B": {
+      "item": "minecraft:oak_wood"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "B B",
+    "A A"
+  ],
+  "result": {
+    "item": "giddypigs:guinea_pig_house"
+  },
+  "show_notification": true
+}

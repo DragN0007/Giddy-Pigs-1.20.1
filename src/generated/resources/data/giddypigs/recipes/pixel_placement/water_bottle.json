@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:iron_nugget"
+    },
+    "B": {
+      "item": "minecraft:glass_pane"
+    },
+    "C": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "pattern": [
+    "BCB",
+    "BAB"
+  ],
+  "result": {
+    "item": "giddypigs:pixel_placement/water_bottle"
+  },
+  "show_notification": true
+}

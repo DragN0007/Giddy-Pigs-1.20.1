@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:iron_nugget"
+    },
+    "B": {
+      "item": "minecraft:brown_dye"
+    },
+    "C": {
+      "item": "minecraft:pumpkin_seeds"
+    }
+  },
+  "pattern": [
+    "C ",
+    "AB"
+  ],
+  "result": {
+    "item": "giddypigs:pixel_placement/food_dish_brown"
+  },
+  "show_notification": true
+}
