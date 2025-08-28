@@ -1,8 +1,0 @@
-{
-  "type": "giddypigs:spawn_biome_modifier",
-  "biomes": [
-    "meadow",
-    "sparse_jungle",
-    "savanna"
-  ]
-}

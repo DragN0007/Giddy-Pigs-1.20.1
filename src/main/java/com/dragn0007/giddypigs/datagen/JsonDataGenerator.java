@@ -21,5 +21,7 @@ public class JsonDataGenerator {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
         generator.addProvider(event.includeServer(), new GGPRecipeMaker(packOutput));
+        generator.addProvider(event.includeClient(), new GGPItemModelProvider(packOutput, existingFileHelper));
+        generator.addProvider(event.includeServer(), new GGPWorldGenerator(packOutput, lookupProvider));
     }
 }

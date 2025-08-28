@@ -2,36 +2,45 @@ package com.dragn0007.giddypigs.entities;
 
 import com.dragn0007.giddypigs.GiddyGuineaPigs;
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.model.GeoModel;
+import net.minecraft.util.Mth;
+import software.bernie.geckolib.constant.DataTickets;
+import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.model.DefaultedEntityGeoModel;
+import software.bernie.geckolib.model.data.EntityModelData;
 
-public class GuineaPigModel extends GeoModel<GuineaPig> {
+public class GuineaPigModel extends DefaultedEntityGeoModel<GuineaPig> {
+
+    public GuineaPigModel() {
+        super(new ResourceLocation(GiddyGuineaPigs.MODID, "guinea_pig"), true);
+    }
+
+    @Override
+    public void setCustomAnimations(GuineaPig animatable, long instanceId, AnimationState<GuineaPig> animationState) {
+
+        CoreGeoBone head = getAnimationProcessor().getBone("head");
+
+        if (head != null) {
+            EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
+            head.setRotX(head.getRotX() + (entityData.headPitch() * Mth.DEG_TO_RAD));
+            float maxYaw = Mth.clamp(entityData.netHeadYaw(), -25.0f, 25.0f);
+            head.setRotY(head.getRotY() + (maxYaw * Mth.DEG_TO_RAD));
+        }
+    }
 
     public enum Variant {
-        ALBINO(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/albino.png")),
         BLACK(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/black.png")),
+        BLUE(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/blue.png")),
         BROWN(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/brown.png")),
-        COCOA(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/cocoa.png")),
+        CHOCOLATE(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/chocolate.png")),
         CREAM(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/cream.png")),
-        DARK_COCOA(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/dark_cocoa.png")),
-        DARK_RED(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/dark_red.png")),
         GOLD(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/gold.png")),
-        GREY(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/grey.png")),
+        LILAC(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/lilac.png")),
+        MAHOGANY(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/mahogany.png")),
         RED(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/red.png")),
-        SLATE(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/slate.png")),
-        WHITE(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/white.png")),
-
-        ALBINO_FLUFFY(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/albino_fluffy.png")),
-        BLACK_FLUFFY(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/black_fluffy.png")),
-        BROWN_FLUFFY(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/brown_fluffy.png")),
-        COCOA_FLUFFY(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/cocoa_fluffy.png")),
-        CREAM_FLUFFY(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/cream_fluffy.png")),
-        DARK_COCOA_FLUFFY(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/dark_cocoa_fluffy.png")),
-        DARK_RED_FLUFFY(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/dark_red_fluffy.png")),
-        GOLD_FLUFFY(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/gold_fluffy.png")),
-        GREY_FLUFFY(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/grey_fluffy.png")),
-        RED_FLUFFY(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/red_fluffy.png")),
-        SLATE_FLUFFY(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/slate_fluffy.png")),
-        WHITE_FLUFFY(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/white_fluffy.png"));
+        SILVER(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/silver.png")),
+        TAN(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/tan.png")),
+        WHITE(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/white.png"));
 
         public final ResourceLocation resourceLocation;
         Variant(ResourceLocation resourceLocation) {
@@ -42,19 +51,15 @@ public class GuineaPigModel extends GeoModel<GuineaPig> {
         }
     }
 
-    public static final ResourceLocation MODEL = new ResourceLocation(GiddyGuineaPigs.MODID, "geo/guinea_pig.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(GiddyGuineaPigs.MODID, "animations/guinea_pig.animation.json");
-    public static final ResourceLocation BABY_TEXTURE = new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/baby/baby.png");
 
     @Override
     public ResourceLocation getModelResource(GuineaPig object) {
-        return MODEL;
+        return GuineaPig.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
     @Override
     public ResourceLocation getTextureResource(GuineaPig object) {
-        if(object.isBaby())
-            return BABY_TEXTURE;
         return object.getTextureLocation();
     }
 

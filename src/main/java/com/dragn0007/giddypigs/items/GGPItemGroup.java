@@ -24,6 +24,9 @@ public class GGPItemGroup {
                         .displayItems((displayParameters, output) -> {
 
                             output.accept(GGPItems.GUINEA_PIG_SPAWN_EGG.get());
+                            output.accept(GGPItems.GUINEA_PIG.get());
+                            output.accept(GGPItems.COOKED_GUINEA_PIG.get());
+                            output.accept(GGPItems.GUINEA_PIG_HIDE.get());
                             output.accept(GGPBlocks.ENCLOSURE_PANE.get());
                             output.accept(GGPBlocks.ENCLOSURE_PANE_CORNER.get());
                             output.accept(GGPBlocks.GUINEA_PIG_HOUSE.get());

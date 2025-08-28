@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_guinea_pig": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "giddypigs:guinea_pig"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "giddypigs:cooked_guinea_pig_campfire_cooking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_guinea_pig",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "giddypigs:cooked_guinea_pig_campfire_cooking"
+    ]
+  },
+  "sends_telemetry_event": false
+}

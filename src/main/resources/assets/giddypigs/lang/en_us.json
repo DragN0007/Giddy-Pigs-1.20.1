@@ -4,11 +4,18 @@
   "item.giddypigs.guinea_pig_spawn_egg": "Guinea Pig Spawn Egg",
   "entity.giddypigs.guinea_pig_entity": "Guinea Pig",
 
+  "item.giddypigs.guinea_pig": "Guinea Pig",
+  "item.giddypigs.cooked_guinea_pig": "Cooked Guinea Pig",
+  "item.giddypigs.guinea_pig_hide": "Guinea Pig Hide",
+
   "block.giddypigs.guinea_pig_house": "Guinea Pig House",
   "block.giddypigs.food_dish_black": "Black Food Dish",
   "block.giddypigs.food_dish_brown": "Brown Food Dish",
   "block.giddypigs.food_dish_white": "White Food Dish",
   "block.giddypigs.water_bottle": "Water Bottle",
   "block.giddypigs.enclosure_pane": "Enclosure Pane",
-  "block.giddypigs.enclosure_pane_corner": "Enclosure Pane Corner"
+  "block.giddypigs.enclosure_pane_corner": "Enclosure Pane Corner",
+
+  "tooltip.giddy_pigs.wandering.tooltip": "Your Guinea Pig is Wandering",
+  "tooltip.giddy_pigs.following.tooltip": "Your Guinea Pig is Following"
 }

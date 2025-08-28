@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_hamster": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "giddypigs:guinea_pig"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "giddypigs:cooked_guinea_pig_smoking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_hamster",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "giddypigs:cooked_guinea_pig_smoking"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -21,7 +21,7 @@ plugins {
 apply plugin: 'org.spongepowered.mixin'
 
 
-version = '1.20.1-1.0'
+version = '1.20.1-1.1'
 group = mod_group_id
 
 base {
@@ -77,6 +77,8 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
 
+    mavenLocal()
+
     maven {
         name = 'GeckoLib'
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
@@ -87,12 +89,22 @@ repositories {
         maven {
             url 'https://www.cursemaven.com'
         }
+        maven {
+            url 'https://maven.blamejared.com'
+        }
     }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:1.20.1-47.2.0"
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:4.4.4')
+    implementation fg.deobf("curse.maven:dragns-livestock-overhaul-1131669:6864610")
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE")
+
+    implementation fg.deobf("curse.maven:jade-324717:5876199")
+    implementation fg.deobf("curse.maven:xaeros-minimap-263420:6012833")
+    implementation fg.deobf("curse.maven:jei-238222:6075247")
 }
 
 tasks.named('processResources', ProcessResources).configure {

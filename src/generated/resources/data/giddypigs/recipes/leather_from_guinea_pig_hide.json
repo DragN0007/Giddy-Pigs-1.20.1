@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "giddypigs:guinea_pig_hide"
+    },
+    {
+      "item": "giddypigs:guinea_pig_hide"
+    },
+    {
+      "item": "giddypigs:guinea_pig_hide"
+    },
+    {
+      "item": "giddypigs:guinea_pig_hide"
+    }
+  ],
+  "result": {
+    "item": "minecraft:leather"
+  }
+}

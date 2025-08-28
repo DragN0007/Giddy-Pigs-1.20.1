@@ -1,13 +1,14 @@
 package com.dragn0007.giddypigs.datagen;
 
+import com.dragn0007.giddypigs.GiddyGuineaPigs;
 import com.dragn0007.giddypigs.blocks.GGPBlocks;
+import com.dragn0007.giddypigs.items.GGPItems;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
 import java.util.function.Consumer;
@@ -19,6 +20,25 @@ public class GGPRecipeMaker extends RecipeProvider implements IConditionBuilder 
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.LEATHER)
+                .requires(GGPItems.GUINEA_PIG_HIDE.get())
+                .requires(GGPItems.GUINEA_PIG_HIDE.get())
+                .requires(GGPItems.GUINEA_PIG_HIDE.get())
+                .requires(GGPItems.GUINEA_PIG_HIDE.get())
+                .unlockedBy("guinea_pig_hide", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(GGPItems.GUINEA_PIG_HIDE.get()).build()))
+                .save(pFinishedRecipeConsumer,  new ResourceLocation(GiddyGuineaPigs.MODID, "leather_from_guinea_pig_hide"));
+
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(GGPItems.GUINEA_PIG.get()), RecipeCategory.MISC, GGPItems.COOKED_GUINEA_PIG.get(), 0.35F, 100)
+                .unlockedBy("has_hamster", has(GGPItems.GUINEA_PIG.get())).save(pFinishedRecipeConsumer, new ResourceLocation(GiddyGuineaPigs.MODID, "cooked_guinea_pig_smoking"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(GGPItems.GUINEA_PIG.get()), RecipeCategory.MISC, GGPItems.COOKED_GUINEA_PIG.get(), 0.35F, 200)
+                .unlockedBy("has_guinea_pig", has(GGPItems.GUINEA_PIG.get())).save(pFinishedRecipeConsumer, new ResourceLocation(GiddyGuineaPigs.MODID, "cooked_guinea_pig_smelting"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(GGPItems.GUINEA_PIG.get()), RecipeCategory.MISC, GGPItems.COOKED_GUINEA_PIG.get(), 0.35F, 600)
+                .unlockedBy("has_guinea_pig", has(GGPItems.GUINEA_PIG.get())).save(pFinishedRecipeConsumer, new ResourceLocation(GiddyGuineaPigs.MODID, "cooked_guinea_pig_campfire_cooking"));
+
+
+
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GGPBlocks.ENCLOSURE_PANE.get(), 16)
                 .define('A', Items.IRON_INGOT)

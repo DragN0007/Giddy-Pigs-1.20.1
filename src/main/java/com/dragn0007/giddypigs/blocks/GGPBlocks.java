@@ -10,7 +10,6 @@ import com.dragn0007.giddypigs.blocks.pixel_placement.util.PixelPlacer;
 import com.dragn0007.giddypigs.blocks.pixel_placement.util.PixelPlacerContainer;
 import com.dragn0007.giddypigs.blocks.pixel_placement.util.PixelPlacerEntity;
 import com.dragn0007.giddypigs.blocks.pixel_placement.util.PixelPlacerItem;
-import com.dragn0007.giddypigs.items.GGPItemGroup;
 import com.dragn0007.giddypigs.items.GGPItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
