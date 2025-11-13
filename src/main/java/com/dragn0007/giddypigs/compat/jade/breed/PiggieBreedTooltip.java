@@ -24,8 +24,11 @@ public class PiggieBreedTooltip implements IEntityComponentProvider {
 
     private String getBreeds(int breed) {
         switch (breed) {
-            case 0: return "Common";
-            case 1: return "Fluffy";
+            case 0: return "American Shorthair";
+            case 1: return "Coronet";
+            case 2: return "Baldwin";
+            case 3: return "Peruvian";
+            case 4: return "Cuy";
             default: return "Unknown";
         }
     }

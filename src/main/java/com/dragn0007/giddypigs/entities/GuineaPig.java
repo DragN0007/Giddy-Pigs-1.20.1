@@ -7,6 +7,7 @@ import com.dragn0007.giddypigs.GiddyGuineaPigs;
 import com.dragn0007.giddypigs.entities.ai.GuineaPigFollowOwnerGoal;
 import com.dragn0007.giddypigs.entities.ai.PiggieFollowLeaderGoal;
 import com.dragn0007.giddypigs.entities.util.EntityTypes;
+import com.dragn0007.giddypigs.items.GGPItems;
 import com.dragn0007.giddypigs.util.GGPTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -33,11 +34,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -332,7 +337,7 @@ public class GuineaPig extends TamableAnimal implements GeoEntity {
 					itemstack.shrink(1);
 				}
 
-				if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
+				if (this.random.nextInt(3) == 0 && !ForgeEventFactory.onAnimalTame(this, player)) {
 					this.tame(player);
 					this.navigation.stop();
 					this.setTarget((LivingEntity)null);
@@ -457,10 +462,14 @@ public class GuineaPig extends TamableAnimal implements GeoEntity {
 			this.setEyeColorByChance();
 			this.setBreedChance();
 		} else {
-			this.setVariant(random.nextInt(GuineaPigModel.Variant.values().length));
+			this.setVariant(random.nextInt((GuineaPigModel.Variant.values().length) - 1));
 			this.setOverlayVariant(random.nextInt(GuineaPigMarkingLayer.Overlay.values().length));
 			this.setOverlayVariant(random.nextInt(GuineaPigEyeLayer.Overlay.values().length));
 			this.setBreed(random.nextInt(Breed.values().length));
+		}
+
+		if (this.getBreed() == 2) {
+			this.setVariant(12);
 		}
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
@@ -479,6 +488,10 @@ public class GuineaPig extends TamableAnimal implements GeoEntity {
 			int[] variants = {0, 2, 3, 7};
 			int randomIndex = new Random().nextInt(variants.length);
 			this.setVariant(variants[randomIndex]);
+		}
+
+		if (this.getBreed() == 2) {
+			this.setVariant(12);
 		}
 	}
 
@@ -512,7 +525,7 @@ public class GuineaPig extends TamableAnimal implements GeoEntity {
 
 	public void setBreedChance() {
 		if (random.nextDouble() <= 0.02) {
-			this.setBreed(1);
+			this.setBreed(this.getRandom().nextInt(Breed.values().length));
 		} else if (random.nextDouble() > 0.02) {
 			this.setBreed(0);
 		}
@@ -575,14 +588,32 @@ public class GuineaPig extends TamableAnimal implements GeoEntity {
 			GuineaPig partner = (GuineaPig) ageableMob;
 			baby = EntityTypes.GUINEA_PIG_ENTITY.get().create(serverLevel);
 
-			int i = this.random.nextInt(9);
-			int variant;
-			if (i < 4) {
-				variant = this.getVariant();
-			} else if (i < 8) {
-				variant = partner.getVariant();
+			int k = this.random.nextInt(5);
+			int breed;
+			if (k < 2) {
+				breed = this.getBreed();
+			} else if (k < 4) {
+				breed = partner.getBreed();
 			} else {
-				variant = this.random.nextInt(GuineaPigModel.Variant.values().length);
+				breed = this.random.nextInt(Breed.values().length);
+			}
+
+			int i = this.random.nextInt(9);
+			int variant = 0;
+			if (partner.getVariant() != 12 && this.getVariant() != 12) {
+				if (i < 4) {
+					variant = this.getVariant();
+				} else if (i < 8) {
+					variant = partner.getVariant();
+				} else {
+					variant = this.random.nextInt((GuineaPigModel.Variant.values().length) - 1);
+				}
+			} else {
+				if (baby.getBreed() == 2) {
+					baby.setVariant(12);
+				} else {
+					variant = this.random.nextInt((GuineaPigModel.Variant.values().length) - 1);
+				}
 			}
 
 			int j = this.random.nextInt(5);
@@ -605,21 +636,15 @@ public class GuineaPig extends TamableAnimal implements GeoEntity {
 				eye = this.random.nextInt(GuineaPigEyeLayer.Overlay.values().length);
 			}
 
-			int k = this.random.nextInt(5);
-			int breed;
-			if (k < 2) {
-				breed = this.getBreed();
-			} else if (k < 4) {
-				breed = partner.getBreed();
-			} else {
-				breed = this.random.nextInt(Breed.values().length);
-			}
-
 			baby.setVariant(variant);
 			baby.setOverlayVariant(overlay);
 			baby.setEyeVariant(eye);
 			baby.setBreed(breed);
 			baby.setGender(random.nextInt(Gender.values().length));
+
+			if (baby.getBreed() == 2) {
+				baby.setVariant(12);
+			}
 		}
 
 		return baby;
@@ -627,7 +652,10 @@ public class GuineaPig extends TamableAnimal implements GeoEntity {
 
 	public enum Breed {
 		DEFAULT(new ResourceLocation(GiddyGuineaPigs.MODID, "geo/guinea_pig.geo.json")),
-		FLUFFY(new ResourceLocation(GiddyGuineaPigs.MODID, "geo/fluffy.geo.json"));
+		FLUFFY(new ResourceLocation(GiddyGuineaPigs.MODID, "geo/fluffy.geo.json")),
+		BALDWIN(new ResourceLocation(GiddyGuineaPigs.MODID, "geo/guinea_pig.geo.json")),
+		PERUVIAN(new ResourceLocation(GiddyGuineaPigs.MODID, "geo/peruvian.geo.json")),
+		CUY(new ResourceLocation(GiddyGuineaPigs.MODID, "geo/cuy.geo.json"));
 
 		public final ResourceLocation resourceLocation;
 
@@ -639,4 +667,20 @@ public class GuineaPig extends TamableAnimal implements GeoEntity {
 			return Breed.values()[ordinal % Breed.values().length];
 		}
 	}
+
+	@Override
+	public void dropCustomDeathLoot(DamageSource source, int i, boolean b) {
+		super.dropCustomDeathLoot(source, i, b);
+		Random random = new Random();
+		if (this.getBreed() == 4) {
+			if (random.nextDouble() < 0.40) {
+				this.spawnAtLocation(GGPItems.GUINEA_PIG.get(), 2);
+				this.spawnAtLocation(GGPItems.GUINEA_PIG_HIDE.get(), 2);
+			} else if (random.nextDouble() > 0.40) {
+				this.spawnAtLocation(GGPItems.GUINEA_PIG.get());
+				this.spawnAtLocation(GGPItems.GUINEA_PIG_HIDE.get());
+			}
+		}
+	}
+
 }

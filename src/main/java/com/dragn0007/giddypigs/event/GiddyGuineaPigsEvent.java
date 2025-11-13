@@ -10,8 +10,12 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -44,4 +48,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
     public static void entityRendererEvent(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(GGPBlocks.PIXEL_PLACER_ENTITY.get(), PixelPlacerEntityRenderer::new);
     }
+
+    @SubscribeEvent
+    public static void spawnPlacementRegisterEvent(SpawnPlacementRegisterEvent event) {
+        event.register(EntityTypes.GUINEA_PIG_ENTITY.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
+        }
 }

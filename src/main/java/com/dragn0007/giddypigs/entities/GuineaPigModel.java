@@ -40,7 +40,8 @@ public class GuineaPigModel extends DefaultedEntityGeoModel<GuineaPig> {
         RED(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/red.png")),
         SILVER(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/silver.png")),
         TAN(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/tan.png")),
-        WHITE(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/white.png"));
+        WHITE(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/white.png")),
+        HAIRLESS(new ResourceLocation(GiddyGuineaPigs.MODID, "textures/guinea_pig/hairless.png"));
 
         public final ResourceLocation resourceLocation;
         Variant(ResourceLocation resourceLocation) {
